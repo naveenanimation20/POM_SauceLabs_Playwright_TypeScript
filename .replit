@@ -1,0 +1,39 @@
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Playwright Tests"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "playwright_tests"
+
+[[workflows.workflow]]
+name = "Playwright Tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm init -y && npm install -D @playwright/test typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint prettier && npx playwright install && npm run test"
+
+[[workflows.workflow]]
+name = "playwright_tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm init -y && npm install --save-dev @playwright/test typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint prettier && npx playwright install && npx playwright test --reporter=list"
+
+[deployment]
+run = ["sh", "-c", "npm init -y && npm install -D @playwright/test typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint prettier && npx playwright install && npm run test"]
