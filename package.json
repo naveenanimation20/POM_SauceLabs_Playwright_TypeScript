@@ -19,5 +19,8 @@
     "prettier": "^3.5.3",
     "typescript": "^5.8.3"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.15.29"
+  }
 }

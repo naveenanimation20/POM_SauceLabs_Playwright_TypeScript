@@ -19,6 +19,10 @@ args = "Playwright Tests"
 task = "workflow.run"
 args = "playwright_tests"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Tests"
+
 [[workflows.workflow]]
 name = "Playwright Tests"
 author = "agent"
@@ -34,6 +38,14 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm init -y && npm install --save-dev @playwright/test typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint prettier && npx playwright install && npx playwright test --reporter=list"
+
+[[workflows.workflow]]
+name = "Run Tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx playwright test --reporter=list"
 
 [deployment]
 run = ["sh", "-c", "npm init -y && npm install -D @playwright/test typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint prettier && npx playwright install && npm run test"]
